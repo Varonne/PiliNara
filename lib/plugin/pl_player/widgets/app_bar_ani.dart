@@ -62,7 +62,7 @@ Widget build(BuildContext context) {
               right: isFullScreen,
               child: child,
             ),
-    ),
-  );
+      ),
+    );
+  }
 }
-  
