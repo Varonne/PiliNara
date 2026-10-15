@@ -47,22 +47,22 @@ class AppBarAni extends StatelessWidget {
     tileMode: TileMode.mirror,
   );
 
-  @override
-  Widget build(BuildContext context) {
-    return SlideTransition(
-      position: controller.drive(isTop ? _topPos : _bottomPos),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: isTop ? _topDecoration : _bottomDecoration,
-        ),
-        child: removeSafeArea
-            ? child
-            : ViewSafeArea(
-                left: isFullScreen,
-                right: isFullScreen,
-                child: child,
-              ),
+ @override
+Widget build(BuildContext context) {
+  return FadeTransition(
+    opacity: controller,
+    child: DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: isTop ? _topDecoration : _bottomDecoration,
       ),
-    );
-  }
+      child: removeSafeArea
+          ? child
+          : ViewSafeArea(
+              left: isFullScreen,
+              right: isFullScreen,
+              child: child,
+            ),
+    ),
+  );
 }
+  
