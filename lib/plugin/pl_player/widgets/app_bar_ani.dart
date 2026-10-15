@@ -50,7 +50,7 @@ class AppBarAni extends StatelessWidget {
  @override
 Widget build(BuildContext context) {
   return FadeTransition(
-    opacity: controller,
+    opacity: controller.drive(CurveTween(curve: Curves.easeOutCubic)),
     child: DecoratedBox(
       decoration: BoxDecoration(
         gradient: isTop ? _topDecoration : _bottomDecoration,
