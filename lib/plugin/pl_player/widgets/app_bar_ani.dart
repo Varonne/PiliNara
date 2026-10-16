@@ -47,21 +47,32 @@ class AppBarAni extends StatelessWidget {
     tileMode: TileMode.mirror,
   );
 
- @override
-Widget build(BuildContext context) {
-  return FadeTransition(
-    opacity: controller.drive(CurveTween(curve: Curves.easeOutCubic)),
-    child: DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: isTop ? _topDecoration : _bottomDecoration,
-      ),
-      child: removeSafeArea
-          ? child
-          : ViewSafeArea(
-              left: isFullScreen,
-              right: isFullScreen,
-              child: child,
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        return IgnorePointer(
+          ignoring: controller.value == 0,
+          child: FadeTransition(
+            opacity: controller.drive(
+              CurveTween(curve: Curves.easeOutExpo ),
             ),
+            child: child,
+          ),
+        );
+      },
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: isTop ? _topDecoration : _bottomDecoration,
+        ),
+        child: removeSafeArea
+            ? child
+            : ViewSafeArea(
+                left: isFullScreen,
+                right: isFullScreen,
+                child: child,
+              ),
       ),
     );
   }
